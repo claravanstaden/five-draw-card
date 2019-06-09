@@ -14,16 +14,8 @@ public class Card {
         return suite;
     }
 
-    public void setSuite(String suite) {
-        this.suite = suite;
-    }
-
     public String getFace() {
         return face;
-    }
-
-    public void setFace(String face) {
-        this.face = face;
     }
 
     public void print() {

@@ -7,31 +7,34 @@ import java.util.Stack;
 
 public class Deck {
 
-    private Stack<Card> cards = new Stack<Card>();
+    private Stack<Card> cards = new Stack<>();
+
+    private List<String> suites = new ArrayList<>();
+
+    private List<String> faces = new ArrayList<>();
 
     public Deck() {
-        List<String> faces = new ArrayList<>();
-        faces.add("♥");
-        faces.add("♦");
-        faces.add("♣");
-        faces.add("♠");
+        suites.add("♥");
+        suites.add("♦");
+        suites.add("♣");
+        suites.add("♠");
 
-        List<String> suites = new ArrayList<>();
-        suites.add("2");
-        suites.add("3");
-        suites.add("4");
-        suites.add("5");
-        suites.add("6");
-        suites.add("7");
-        suites.add("8");
-        suites.add("9");
-        suites.add("J");
-        suites.add("Q");
-        suites.add("K");
-        suites.add("A");
+        faces.add("2");
+        faces.add("3");
+        faces.add("4");
+        faces.add("5");
+        faces.add("6");
+        faces.add("7");
+        faces.add("8");
+        faces.add("9");
+        faces.add("10");
+        faces.add("J");
+        faces.add("Q");
+        faces.add("K");
+        faces.add("A");
 
-        for (String suite : suites) {
-            for (String face : faces) {
+        for (String suite : faces) {
+            for (String face : this.suites) {
                 cards.add(new Card(face, suite));
             }
         }
@@ -49,6 +52,10 @@ public class Deck {
         System.out.println();
     }
 
+    public void printSize() {
+        System.out.println(this.cards.size());
+    }
+
     public Hand drawHand(Hand hand) {
         for (int i = 0; i < hand.getHandCount(); i++) {
             hand.add(cards.pop());
@@ -56,4 +63,17 @@ public class Deck {
 
         return hand;
     }
+
+    public List<String> getSuites() {
+        return suites;
+    }
+
+    public List<String> getFaces() {
+        return faces;
+    }
+
+    public Stack<Card> getCards() {
+        return cards;
+    }
+
 }

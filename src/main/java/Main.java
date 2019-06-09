@@ -15,14 +15,17 @@ public class Main {
 
         deck.shuffle();
         deck.print();
+        deck.printSize();
 
         System.out.println("Shuffling... Shuffling... Shuffling...");
 
         Hand hand = new Hand(5);
         deck.drawHand(hand);
 
+        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
+
         System.out.println("Your hand: " + hand.toString());
-        System.out.println("Your have: ");
+        System.out.println("Your have: " + pokerHandAnalyzer.analyzeHand());
 
         /*
         PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer();
