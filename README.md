@@ -1,5 +1,5 @@
 # five-draw-card
-Variant of a poker game.
+Sets up a standard card deck of 52 cards, shuffles them, draws a 5 card hand and outputs the highest ranked poker score.
 
 # Install Steps
 
