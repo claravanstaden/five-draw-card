@@ -1,4 +1,6 @@
 import com.claravanstaden.Card;
+import com.claravanstaden.Deck;
+import com.claravanstaden.Hand;
 import com.claravanstaden.PokerHandAnalyzer;
 
 import java.util.List;
@@ -9,10 +11,20 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Deck deck = new Deck();
+
+        deck.shuffle();
+        deck.print();
+
         System.out.println("Shuffling... Shuffling... Shuffling...");
-        System.out.println("Your hand: ");
+
+        Hand hand = new Hand(5);
+        deck.drawHand(hand);
+
+        System.out.println("Your hand: " + hand.toString());
         System.out.println("Your have: ");
 
+        /*
         PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer();
         System.out.println("=============================:\n");
         System.out.println("Regular hands:\n");
@@ -41,6 +53,6 @@ public class Main {
                 "QC TC 7C WW WW",
                 "QC TC 7H WW WW"}) {
             System.out.println(pokerHandAnalyzer.analyzeHandWithWildcards(input.split(" ")));
-        }
+        }*/
     }
 }

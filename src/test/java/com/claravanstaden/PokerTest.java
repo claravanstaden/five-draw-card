@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class DiGraphTest {
+public class PokerTest {
 
     @Before
     public void setUp() {
