@@ -197,7 +197,12 @@ public class PokerTest {
     }
 
     @Test
-    public void testShuffle() {
-        deck.shuffle();
+    public void testInvalidHand() {
+        hand = new Hand(5);
+
+        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
+        Score score = pokerHandAnalyzer.analyzeHand();
+
+        assertEquals("invalid hand: no cards found", score.toString());
     }
 }

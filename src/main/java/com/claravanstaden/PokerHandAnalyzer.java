@@ -2,9 +2,7 @@ package com.claravanstaden;
 
 import java.util.*;
 
-/**
- * Copied from https://www.rosettacode.org/wiki/Poker_hand_analyser#Java
- */
+
 public class PokerHandAnalyzer {
 
     private final Deck deck;
@@ -15,8 +13,15 @@ public class PokerHandAnalyzer {
         this.hand = hand;
     }
 
+    /**
+     * Copied from https://www.rosettacode.org/wiki/Poker_hand_analyser#Java,
+     * modified to use Hand object.
+     */
     public Score analyzeHand() {
 
+        if (hand.getCards().size() == 0) {
+            return new Score("invalid hand: no cards found", -1);
+        }
         Map<String, Integer> faceCount = new HashMap<>();
         long straight = 0, flush = 0;
         for (Card card : hand.getCards()) {

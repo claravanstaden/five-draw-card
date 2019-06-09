@@ -44,18 +44,6 @@ public class Deck {
         Collections.shuffle(this.cards);
     }
 
-    public void print() {
-        for (Card card : this.cards) {
-            card.print();
-            System.out.print(" ");
-        }
-        System.out.println();
-    }
-
-    public void printSize() {
-        System.out.println(this.cards.size());
-    }
-
     public Hand drawHand(Hand hand) {
         for (int i = 0; i < hand.getHandCount(); i++) {
             hand.add(cards.pop());
@@ -72,8 +60,13 @@ public class Deck {
         return faces;
     }
 
-    public Stack<Card> getCards() {
-        return cards;
-    }
+    public String toString() {
+        StringBuilder cardString = new StringBuilder();
+        for (Card card : cards) {
+            cardString.append(card.toString());
+            cardString.append(" ");
+        }
 
+        return cardString.toString();
+    }
 }

@@ -18,10 +18,6 @@ public class Card {
         return face;
     }
 
-    public void print() {
-        System.out.print(this.toString());
-    }
-
     public String toString() {
         return this.getFace() + this.getSuite();
     }
