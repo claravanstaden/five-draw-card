@@ -10,8 +10,8 @@ import static org.junit.Assert.*;
 
 public class PokerTest {
 
-    Deck deck;
-    Hand hand;
+    private Deck deck;
+    private Hand hand;
 
     @Before
     public void setUp() {

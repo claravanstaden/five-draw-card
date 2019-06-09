@@ -20,7 +20,7 @@ public class PokerHandAnalyzer {
     public Score analyzeHand() {
 
         if (hand.getCards().size() == 0) {
-            return new Score("invalid hand: no cards found", -1);
+            return new Score("invalid hand: no cards found");
         }
         Map<String, Integer> faceCount = new HashMap<>();
         long straight = 0, flush = 0;
@@ -28,14 +28,14 @@ public class PokerHandAnalyzer {
 
             int face = deck.getFaces().indexOf(card.getFace());
             if (face == -1) {
-                return new Score("invalid hand: non-existing face", -1);
+                return new Score("invalid hand: non-existing face");
             }
             straight |= (1 << face);
 
             faceCount.merge(card.getFace(), 1, Integer::sum);
 
             if (deck.getSuites().indexOf(card.getSuite()) == -1) {
-                return new Score("invalid hand: non-existing suit", -1);
+                return new Score("invalid hand: non-existing suit");
             }
             flush |= (1 << card.getSuite().charAt(0));
         }
@@ -51,13 +51,13 @@ public class PokerHandAnalyzer {
         boolean hasFlush = (flush & (flush - 1)) == 0;
 
         if (hasStraight && hasFlush)
-            return new Score("straight-flush", 9);
+            return new Score("straight-flush");
 
         int total = 0;
         for (Map.Entry<String, Integer> entry : faceCount.entrySet()) {
             int count = entry.getValue();
             if (count == 4) {
-                return new Score("four-of-a-kind", 8);
+                return new Score("four-of-a-kind");
             }
 
             if (count == 3) {
@@ -68,28 +68,28 @@ public class PokerHandAnalyzer {
         }
 
         if (total == 5) {
-            return new Score("full-house", 7);
+            return new Score("full-house");
         }
 
         if (hasFlush) {
-            return new Score("flush", 6);
+            return new Score("flush");
         }
 
         if (hasStraight) {
-            return new Score("straight", 5);
+            return new Score("straight");
         }
 
         if (total == 3) {
-            return new Score("three-of-a-kind", 4);
+            return new Score("three-of-a-kind");
         }
 
         if (total == 4) {
-            return new Score("two-pair", 3);
+            return new Score("two-pair");
         }
 
         if (total == 2) {
-            return new Score("one-pair", 2);
+            return new Score("one-pair");
         }
-        return new Score("high-card", 1);
+        return new Score("high-card");
     }
 }
