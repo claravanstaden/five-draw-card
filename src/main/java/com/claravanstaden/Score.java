@@ -1,14 +1,6 @@
 package com.claravanstaden;
 
-public class Score {
-    private final String name;
-
-    Score(String name) {
-        this.name = name;
-    }
-
+public interface Score {
     @Override
-    public String toString() {
-        return name;
-    }
+    String toString();
 }

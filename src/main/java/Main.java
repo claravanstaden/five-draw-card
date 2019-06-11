@@ -1,28 +1,26 @@
-import com.claravanstaden.Card;
-import com.claravanstaden.Deck;
-import com.claravanstaden.Hand;
-import com.claravanstaden.PokerHandAnalyzer;
-
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import com.claravanstaden.*;
+import com.claravanstaden.impl.DeckImpl;
+import com.claravanstaden.impl.HandImpl;
+import com.claravanstaden.impl.FiveCardPokerHandAnalyzer;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Deck deck = new Deck();
+        // Output split from logic to separate presentation layer
+        Deck deck = new DeckImpl();
 
         deck.shuffle();
 
         System.out.println("Shuffling... Shuffling... Shuffling...");
 
-        Hand hand = new Hand(5);
+        Hand hand = new HandImpl(5);
         deck.drawHand(hand);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
 
+        // Automatic toString invocation
         System.out.println("Your hand: " + hand.toString());
-        System.out.println("Your have: " + pokerHandAnalyzer.analyzeHand());
+        System.out.println("Your have: " + pokerHandStrategy.analyzeHand());
     }
 }

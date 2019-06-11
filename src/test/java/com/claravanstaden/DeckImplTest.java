@@ -1,15 +1,17 @@
 package com.claravanstaden;
 
+import com.claravanstaden.impl.DeckImpl;
+import com.claravanstaden.impl.HandImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class DeckTest {
+public class DeckImplTest {
 
     @Test
     public void testHandToString() {
-        Deck deck = new Deck();
-        Hand hand = new Hand(5);
+        Deck deck = new DeckImpl();
+        Hand hand = new HandImpl(5);
 
         Hand fiveHand = deck.drawHand(hand);
 
@@ -18,7 +20,7 @@ public class DeckTest {
 
     @Test
     public void testShuffle() {
-        Deck deck = new Deck();
+        Deck deck = new DeckImpl();
         String sorted = deck.toString();
 
         deck.shuffle();

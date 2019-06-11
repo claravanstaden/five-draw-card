@@ -1,5 +1,8 @@
 package com.claravanstaden;
 
+import com.claravanstaden.impl.DeckImpl;
+import com.claravanstaden.impl.HandImpl;
+import com.claravanstaden.impl.FiveCardPokerHandAnalyzer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,8 +18,7 @@ public class PokerTest {
 
     @Before
     public void setUp() {
-        deck = new Deck();
-
+        deck = new DeckImpl();
     }
 
     @Test
@@ -27,10 +29,10 @@ public class PokerTest {
         cards.add(new Card("♥", "Q"));
         cards.add(new Card("♥", "K"));
         cards.add(new Card("♥", "A"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        Score score = pokerHandStrategy.analyzeHand();
 
         assertEquals("straight-flush", score.toString());
     }
@@ -43,10 +45,10 @@ public class PokerTest {
         cards.add(new Card("♠", "7"));
         cards.add(new Card("♣", "7"));
         cards.add(new Card("♦", "7"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        Score score = pokerHandStrategy.analyzeHand();
 
         assertEquals("four-of-a-kind", score.toString());
     }
@@ -59,10 +61,10 @@ public class PokerTest {
         cards.add(new Card("♠", "7"));
         cards.add(new Card("♣", "7"));
         cards.add(new Card("♦", "7"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        Score score = pokerHandStrategy.analyzeHand();
 
         assertEquals("full-house", score.toString());
     }
@@ -75,10 +77,10 @@ public class PokerTest {
         cards.add(new Card("♠", "7"));
         cards.add(new Card("♠", "9"));
         cards.add(new Card("♠", "2"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        Score score = pokerHandStrategy.analyzeHand();
 
         assertEquals("flush", score.toString());
     }
@@ -91,10 +93,10 @@ public class PokerTest {
         cards.add(new Card("♠", "Q"));
         cards.add(new Card("♠", "K"));
         cards.add(new Card("♦", "A"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        Score score = pokerHandStrategy.analyzeHand();
 
         assertEquals("straight", score.toString());
     }
@@ -107,10 +109,10 @@ public class PokerTest {
         cards.add(new Card("♥", "8"));
         cards.add(new Card("♠", "K"));
         cards.add(new Card("♦", "A"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        Score score = pokerHandStrategy.analyzeHand();
 
         assertEquals("three-of-a-kind", score.toString());
     }
@@ -123,10 +125,10 @@ public class PokerTest {
         cards.add(new Card("♦", "9"));
         cards.add(new Card("♣", "9"));
         cards.add(new Card("♦", "2"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        Score score = pokerHandStrategy.analyzeHand();
 
         assertEquals("two-pair", score.toString());
     }
@@ -139,10 +141,10 @@ public class PokerTest {
         cards.add(new Card("♦", "7"));
         cards.add(new Card("♣", "9"));
         cards.add(new Card("♦", "2"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        Score score = pokerHandStrategy.analyzeHand();
 
         assertEquals("one-pair", score.toString());
     }
@@ -155,16 +157,16 @@ public class PokerTest {
         cards.add(new Card("♦", "7"));
         cards.add(new Card("♣", "9"));
         cards.add(new Card("♦", "2"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        Score score = pokerHandStrategy.analyzeHand();
 
         assertEquals("high-card", score.toString());
     }
 
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void testInvalidSuite() {
         List<Card> cards = new ArrayList<>();
         cards.add(new Card("♥", "J"));
@@ -172,15 +174,13 @@ public class PokerTest {
         cards.add(new Card("♦", "7"));
         cards.add(new Card("♣", "9"));
         cards.add(new Card("♦", "2"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
-
-        assertEquals("invalid hand: non-existing suit", score.toString());
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        pokerHandStrategy.analyzeHand();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void testInvalidFace() {
         List<Card> cards = new ArrayList<>();
         cards.add(new Card("♥", "J"));
@@ -188,21 +188,25 @@ public class PokerTest {
         cards.add(new Card("♦", "jd"));
         cards.add(new Card("♣", "9"));
         cards.add(new Card("♦", "2"));
-        hand = new Hand(5, cards);
+        hand = new HandImpl(5, cards);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
-
-        assertEquals("invalid hand: non-existing face", score.toString());
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        pokerHandStrategy.analyzeHand();
     }
 
-    @Test
+    @Test(expected = RuntimeException.class)
     public void testInvalidHand() {
-        hand = new Hand(5);
+        hand = new HandImpl(5);
 
-        PokerHandAnalyzer pokerHandAnalyzer = new PokerHandAnalyzer(deck, hand);
-        Score score = pokerHandAnalyzer.analyzeHand();
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        pokerHandStrategy.analyzeHand();
+    }
 
-        assertEquals("invalid hand: no cards found", score.toString());
+    @Test(expected = RuntimeException.class)
+    public void testInvalidHandCardSize() {
+        hand = new HandImpl(4);
+
+        PokerHandStrategy pokerHandStrategy = new FiveCardPokerHandAnalyzer(deck, hand);
+        pokerHandStrategy.analyzeHand();
     }
 }
